@@ -1,13 +1,8 @@
 import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/form.module.scss';
-import heights from '../information/height';
+
 import {useRouter} from 'next/router';
-
-
-
-
-
 
 export default function TdeeForm(){
        const router = useRouter();
@@ -16,9 +11,10 @@ export default function TdeeForm(){
             height: '',
             weight: '',
             activityLvl: '',
+            sex:''
         })
         // Destructer state to allow cleaner data
-        const {age,height,weight,activityLvl} = params;
+        const {age,height,weight,activityLvl,sex} = params;
 
         //This function handles basic form input to allow for state-change
         const handleChange=(e)=>setParams({...params, [e.target.name]: e.target.value});
@@ -27,7 +23,7 @@ export default function TdeeForm(){
         const handleSubmit =(e) =>{
             e.preventDefault();
             console.log('submit', params)
-            router.push(`/tdeeresults/data?age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`);
+            router.push(`/tdeeresults/data?sex=${sex}&age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`);
         }
 
         // List of heights in inches and centimeters used by the dropdown menu
@@ -40,10 +36,20 @@ export default function TdeeForm(){
         <>
         <div className={styles.form}>
             <form onSubmit={handleSubmit}>
-            <div>
+
+            <section> 
+                <input type='radio' checked={sex === 'male'} id='sexMale' value='male' name='sex' onChange={handleChange}/>
+                <label for='sexMale'>Male</label>
+               
+               
+                <input type='radio' checked={sex ==='female'}id ='sexFemale' value='female' name='sex' onChange={handleChange}/>
+                <label for='sexFemale'>Female</label>
+
+            </section>
+            <section>
             <label className={styles.label}>Age</label>
             <input onChange={handleChange} className={styles.input} name='age'value={age}></input>
-            </div>
+            </section>
 
             <br/>
 
