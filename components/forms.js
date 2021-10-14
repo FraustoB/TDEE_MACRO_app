@@ -2,6 +2,7 @@ import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/form.module.scss';
 import heights from '../information/height';
+import {useRouter} from 'next/router';
 
 
 
@@ -9,25 +10,30 @@ import heights from '../information/height';
 
 
 export default function TdeeForm(){
+       const router = useRouter();
         const [params, setParams] = useState({
             age:'',
             height: '',
             weight: '',
             activityLvl: '',
         })
-
+        // Destructer state to allow cleaner data
         const {age,height,weight,activityLvl} = params;
-        const handleChange=(e)=>setParams({...params, [e.target.name]: e.target.value})
+
+        //This function handles basic form input to allow for state-change
+        const handleChange=(e)=>setParams({...params, [e.target.name]: e.target.value});
+
+        //Pushes Data inputted by user to the page that will calculate TDEE
         const handleSubmit =(e) =>{
             e.preventDefault();
-            console.log('submit')
+            console.log('submit', params)
+            router.push(`/tdeeresults/data?age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`);
         }
 
         // List of heights in inches and centimeters used by the dropdown menu
         const optionItems = heights.map(height =>
             <option key={height.height} value={height.value}>{height.height}</option>
         )
-        console.log(params)
       
 
     return(
@@ -70,10 +76,8 @@ export default function TdeeForm(){
             </div>
 
             <br/>
-            <button>Submit
-            </button>
+            <button>Calculate</button>
             </form>
-
         </div>
 
     

@@ -25,12 +25,12 @@ const heights = [
     {height: '6ft 4in', value:193},
     {height: '6ft 5in', value:196},
     {height: '6ft 6in', value:198},
-    {height: '6ft 7in', value:165},
-    {height: '6ft 8in', value:165},
-    {height: '6ft 9in', value:165},
-    {height: '6ft 10in', value:165},
-    {height: '6ft 11in', value:165},
-    {height: '7ft 0in', value:165},
+    {height: '6ft 7in', value:201},
+    {height: '6ft 8in', value:203},
+    {height: '6ft 9in', value:206},
+    {height: '6ft 10in', value:208},
+    {height: '6ft 11in', value:211},
+    {height: '7ft 0in', value:213},
 
 ]
 
