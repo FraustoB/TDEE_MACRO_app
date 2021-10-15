@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/form.module.scss';
-
+import heights from '../information/height';
+import activityLvls from '../information/activityLvls';
 import {useRouter} from 'next/router';
 
 export default function TdeeForm(){
@@ -28,8 +29,12 @@ export default function TdeeForm(){
 
         // List of heights in inches and centimeters used by the dropdown menu
         const optionItems = heights.map(height =>
-            <option key={height.height} value={height.value}>{height.height}</option>
-        )
+            <option key={height.height} value={height.value}>{height.height}</option>);
+
+        // imported activity lvls to also map over and use during for dropdown menu
+        const optionActivity = activityLvls.map(actvty => 
+            <option key={actvty.value} value={actvty.value}>{actvty.activity}{actvty.description}</option>);
+
       
 
     return(
@@ -39,11 +44,11 @@ export default function TdeeForm(){
 
             <section> 
                 <input type='radio' checked={sex === 'male'} id='sexMale' value='male' name='sex' onChange={handleChange}/>
-                <label for='sexMale'>Male</label>
+                <label htmlFor='sexMale'>Male</label>
                
                
                 <input type='radio' checked={sex ==='female'}id ='sexFemale' value='female' name='sex' onChange={handleChange}/>
-                <label for='sexFemale'>Female</label>
+                <label htmlFor='sexFemale'>Female</label>
 
             </section>
             <section>
@@ -73,11 +78,7 @@ export default function TdeeForm(){
             <div>
             <label  className={styles.label}>Activity</label>
             <select onChange={handleChange} name='activityLvl' className={styles.input}>
-                <option value={1.2}>Sedentary (no exercise | deskjob)</option>
-                <option value={1.375}>Lightly Active ( 1-3 days/week)</option>
-                <option value={1.55}>Moderately Active (3-5 days/week)</option>
-                <option value={1.725}>Very Active (6-7 days/week)</option>
-                <option value={1.9}>Extremely Active (2x/day) </option> 
+                {optionActivity}
             </select>
             </div>
 
