@@ -10,7 +10,6 @@ import { NonceProvider } from 'react-select';
 export default function Data({initData}){
 
     const [calories,setCalories] = useState(0)
-    console.log(calories)
     const {age,height,weight,activityLvl,sex} = initData;
     return(
         <div>   
