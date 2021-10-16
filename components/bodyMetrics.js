@@ -1,16 +1,19 @@
-import BodyMetricsCalc from "./bodyMetricsCalc";
+
 import {useEffect ,useState} from 'react';
 import activityLvls from "../information/activityLvls";
+import styles from '/styles/bodymetrics.module.scss'
 
 export default function BodyMetrics({props,calories,setCalories}){
+
+    const [curBmr, setCurBmr ] = useState(0);
 
     let {sex,age,height,weight,activityLvl} = props;
 
     useEffect(()=> {
         console.log(props);
-        console.log(bmrCalc(weight,height,sex,age));
-        
+        setCurBmr(bmrCalc(weight,height,sex,age)); 
     },[props])
+      console.log(curBmr)
 
 
     function bmrCalc(weight,height,sex,age){
@@ -30,17 +33,27 @@ export default function BodyMetrics({props,calories,setCalories}){
         return userBmr;
     }
 
-    function calorieCalc(){
-        console.log(calories);
-    }
+    const activityCalories =  activityLvls.map((cur) => (
+        <>
+           <div key={cur.value}>{cur.activity}</div><div>{Math.floor(cur.value * curBmr)} calories per day </div>
+        </>
+        
+
+    ))
+         
+    
 
 
         
     return(
-        <div>
-            Hello From Body Metrics
-            <BodyMetricsCalc props={props}/>
+        <div className={styles.calorieSection}>
+            <div className={styles.mntncCal} >
+            <div className={styles.actvForm}>
+                {activityCalories}  
+            </div>
             
+
+        </div>
         </div>
     )
 }
