@@ -1,12 +1,21 @@
-.actvForm{
-    display: grid;
-    grid-template-columns: 200px 200px;
+.calorieSection {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
+.mntncCal {
+  display: grid;
+  background-color: orange;
+  border: solid 1px black;
+  border-radius: 5px;
+  .calPerDay {
+    border-bottom: solid 1px black;
+  }
+  margin-right: 10px;
+  width: 200px;
+}
 
-
-
-.gridItem{
-    background-color: blue;
-    outline: red;
+.actvForm {
+  display: grid;
+  grid-template-columns: 200px 200px;
 }
