@@ -2,40 +2,35 @@ import React, { useEffect, useState } from "react";
 import activityLvls from "../information/activityLvls";
 import styles from "/styles/bodymetrics.module.scss";
 
-export default function BodyMetrics({ props, calories, setCalories }) {
-  const [curBmr, setCurBmr] = useState(0);
-
-  let { sex, age, height, weight, activityLvl } = props;
+export default function BodyMetrics({
+  userInfo,
+  calories,
+  setCalories,
+  userBmr,
+}) {
+  let { sex, age, height, weight, activityLvl } = userInfo;
+  const [curBmr, setCurBmr] = useState({
+    currentBmr: Math.floor(userBmr),
+    mntncCal: 0,
+  });
 
   useEffect(() => {
-    console.log(props);
-    setCurBmr(bmrCalc(weight, height, sex, age));
-  }, [props]);
-  console.log(curBmr);
-
-  function bmrCalc(weight, height, sex, age) {
-    //first convert LB weight into kg's
-    let weightKg = weight / 2.2;
-    // initialize a user bmr for later
-    let userBmr = "";
-    //determine if user is a male or female, then use the appropriate calculations
-    //to figure out their bmr
-    if (sex === "male") {
-      userBmr = 10 * weightKg + 6.25 * height - 5 * age + 5;
-    } else {
-      userBmr = 10 * weightKg + 6.25 * height - 5 * age - 161;
-    }
-    userBmr = Math.floor(userBmr);
-    return userBmr;
-  }
+    setCurBmr({
+      ...curBmr,
+      mntncCal: Math.floor(curBmr.currentBmr * activityLvl),
+    });
+  }, [userInfo]);
 
   const activityCalories = activityLvls.map((cur) => (
     //need to use React.Fragments in order to avoid errors in react but also not introduce
     //new elements to the dom
     <React.Fragment key={cur.activity}>
-      <div key={cur.value}>{cur.activity}</div>
-      <div key={cur.activity}>
-        {Math.floor(cur.value * curBmr)} calories per day
+      <div className={styles.bottom} key={cur.value}>
+        {cur.activity}
+      </div>
+      <div className={styles.bottom}>
+        {Math.floor(cur.value * curBmr.currentBmr).toLocaleString()} calories
+        per day
       </div>
     </React.Fragment>
   ));
@@ -43,10 +38,27 @@ export default function BodyMetrics({ props, calories, setCalories }) {
   return (
     <div className={styles.calorieSection}>
       <div className={styles.mntncCal}>
-        <div className={styles.calPerDay}>Something here</div>
-        <div>Something Here</div>
+        <div>YOUR MAINTENANCE CALORIES</div>
+        <div className={styles.calPerDay}>
+          <div>{curBmr.mntncCal.toLocaleString()}</div>
+          <div>Calories Per Day</div>
+        </div>
+        <div className={styles.calPerDay}>
+          <div>{(curBmr.mntncCal * 7).toLocaleString()}</div>
+          <div>Calories Per Week</div>
+        </div>
       </div>
-      <div className={styles.actvForm}>{activityCalories}</div>
+
+      {/* //This Section is for the calculated mntnc calories per day depending on users activity Leval */}
+      <div className={styles.actvForm}>
+        {/* both div's named bottom to allow for lines underneath the metrics  */}
+        <div className={styles.bottom}> Basal Metabolic Rate</div>
+        <div className={styles.bottom}>
+          {curBmr.currentBmr.toLocaleString()} calories per day
+        </div>
+        {/* //returns the React Fragment containing our calculated calories for each activity Leval */}
+        {activityCalories}
+      </div>
     </div>
   );
 }

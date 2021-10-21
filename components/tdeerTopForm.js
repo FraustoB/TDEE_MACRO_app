@@ -4,8 +4,6 @@ import heights from "../information/height";
 import styles from "/styles/tdeerForm.module.scss";
 import activityLvls from "../information/activityLvls";
 export default function TdeeTopForm(data) {
-
-
   const router = useRouter();
   const [userParams, setUserParams] = useState({
     age: data.props.age,
@@ -16,13 +14,12 @@ export default function TdeeTopForm(data) {
   });
 
   const { age, height, weight, sex, activityLvl } = userParams;
-  
 
   //basic function to change state
   const handleChange = (e) =>
     setUserParams({ ...userParams, [e.target.name]: e.target.value });
 
-    //function calls on info stores in information folder and creates multiple options for the select element
+  //function calls on info stores in information folder and creates multiple options for the select element
   const optionItems = heights.map((height) => (
     <option key={height.height} value={height.value}>
       {height.height}
@@ -36,45 +33,40 @@ export default function TdeeTopForm(data) {
     </option>
   ));
 
-  const handleSubmit =(e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    router.push(`/tdeeresults/data?sex=${sex}&age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`);
-}
+    router.push(
+      `/tdeeresults/data?sex=${sex}&age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`
+    );
+  };
 
   return (
     <>
       <div>This is the top form</div>
-      <form onSubmit={handleSubmit}>
-      You are a
-      <input
-        onChange={handleChange}
-        name="age"
-        className={styles.input_age}
-        value={age}
-      />
-      y/o
-      <select name="sex" onChange={handleChange} defaultValue={sex}>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-
-      who is <input value={weight} name='weight' onChange={handleChange} /> lbs and
-      <select name="height" onChange={handleChange} defaultValue={height}>
-        {optionItems}
-      </select>
-      with
-
-        <select
-        name="activityLvl"
-        value={activityLvl}
-        onChange={handleChange}
-      >
-        {optionActivity}
-      </select>
-      <button> Re-calculate</button>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        You are a
+        <input
+          onChange={handleChange}
+          name="age"
+          className={styles.input_age}
+          value={age}
+        />
+        y/o
+        <select name="sex" onChange={handleChange} defaultValue={sex}>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        who is <input value={weight} name="weight" onChange={handleChange} />{" "}
+        lbs and
+        <select name="height" onChange={handleChange} defaultValue={height}>
+          {optionItems}
+        </select>
+        with
+        <select name="activityLvl" value={activityLvl} onChange={handleChange}>
+          {optionActivity}
+        </select>
+        <button> Re-calculate</button>
       </form>
-
-
     </>
   );
 }

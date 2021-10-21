@@ -1,6 +1,5 @@
-.Container{
-
-    h1{
-        color: pink;
-    }
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
