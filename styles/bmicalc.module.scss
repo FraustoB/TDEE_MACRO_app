@@ -1,0 +1,28 @@
+$width-amount: 250px;
+
+.main {
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 250px;
+  margin: 0;
+  margin-top: 40px;
+
+  h2 {
+    height: 50px;
+    margin-bottom: -20px;
+  }
+}
+
+.bmiRanges {
+  display: grid;
+  grid-template-columns: 125px 125px;
+  border-bottom: 1px solid black;
+  width: $width-amount;
+  height: 25px;
+}
+.classification {
+  height: 100px;
+  width: $width-amount;
+}

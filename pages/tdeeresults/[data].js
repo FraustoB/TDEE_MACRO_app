@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "/styles/tdeeresults.module.scss";
 
 import TdeeTopForm from "../../components/tdeerTopForm";
@@ -7,7 +7,12 @@ import BmiCalc from "../../components/bmiCalc";
 
 export default function Data({ initData }) {
   const [calories, setCalories] = useState(0);
+  const [userBmr, setUserBmr] = useState();
   const { age, height, weight, activityLvl, sex } = initData;
+
+  useEffect(() => {
+    setUserBmr(bmrCalc(weight, height, sex, age));
+  }, [initData]);
 
   function bmrCalc(weight, height, sex, age) {
     //first convert LB weight into kg's
@@ -24,7 +29,6 @@ export default function Data({ initData }) {
     userBmr = Math.floor(userBmr);
     return userBmr;
   }
-  const userBmr = bmrCalc(weight, height, sex, age);
 
   return (
     <div className={styles.body}>

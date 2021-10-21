@@ -9,17 +9,13 @@ export default function BodyMetrics({
   userBmr,
 }) {
   let { sex, age, height, weight, activityLvl } = userInfo;
-  const [curBmr, setCurBmr] = useState({
-    currentBmr: Math.floor(userBmr),
-    mntncCal: 0,
-  });
+  const currentBmr = Math.floor(userBmr);
+  const calPerDay = calcMaintenance(userBmr, activityLvl);
 
-  useEffect(() => {
-    setCurBmr({
-      ...curBmr,
-      mntncCal: Math.floor(curBmr.currentBmr * activityLvl),
-    });
-  }, [userInfo]);
+  function calcMaintenance(userBmr, activityLvl) {
+    const maintenanceCal = Math.floor(userBmr * activityLvl);
+    return maintenanceCal;
+  }
 
   const activityCalories = activityLvls.map((cur) => (
     //need to use React.Fragments in order to avoid errors in react but also not introduce
@@ -29,8 +25,7 @@ export default function BodyMetrics({
         {cur.activity}
       </div>
       <div className={styles.bottom}>
-        {Math.floor(cur.value * curBmr.currentBmr).toLocaleString()} calories
-        per day
+        {Math.floor(cur.value * currentBmr).toLocaleString()} calories per day
       </div>
     </React.Fragment>
   ));
@@ -40,11 +35,11 @@ export default function BodyMetrics({
       <div className={styles.mntncCal}>
         <div>YOUR MAINTENANCE CALORIES</div>
         <div className={styles.calPerDay}>
-          <div>{curBmr.mntncCal.toLocaleString()}</div>
+          <div>{calPerDay.toLocaleString()}</div>
           <div>Calories Per Day</div>
         </div>
         <div className={styles.calPerDay}>
-          <div>{(curBmr.mntncCal * 7).toLocaleString()}</div>
+          <div>{(calPerDay * 7).toLocaleString()}</div>
           <div>Calories Per Week</div>
         </div>
       </div>
@@ -54,7 +49,7 @@ export default function BodyMetrics({
         {/* both div's named bottom to allow for lines underneath the metrics  */}
         <div className={styles.bottom}> Basal Metabolic Rate</div>
         <div className={styles.bottom}>
-          {curBmr.currentBmr.toLocaleString()} calories per day
+          {currentBmr.toLocaleString()} calories per day
         </div>
         {/* //returns the React Fragment containing our calculated calories for each activity Leval */}
         {activityCalories}
