@@ -3,21 +3,9 @@ import styles from "/styles/bmicalc.module.scss";
 
 export default function BmiCalc({ userInfo }) {
   const { age, height, weight, sex, activityLvl } = userInfo;
-  //   const [data, setData] = useState({
-  //     bmi: 0,
-  //     sqHeight: 0,
-  //   });
-
-  //   useEffect(() => {
-  //     // using Math.round to round the bmi to the 10ths place
-  //     setData({ ...data, bmi: Math.round(10 * calcBmi(weight, height)) / 10 });
-  //   }, [userInfo]);
 
   const bmi = Math.round(10 * calcBmi(weight, height)) / 10;
-
   const bmiClassified = weightClassCalc(bmi);
-  console.log(bmi);
-  console.log(bmiClassified);
 
   function calcBmi(weight, height) {
     let weightKg = 0;
@@ -42,31 +30,33 @@ export default function BmiCalc({ userInfo }) {
   }
 
   return (
-    <div className={styles.main}>
-      <h2>BMI SCORE: {bmi} </h2>
-      <br />
+    <>
+      <div className={styles.main}>
+        <h2>BMI SCORE: {bmi} </h2>
+        <br />
 
-      <p className={styles.classification}>
-        Your <b>BMI</b> score is <b>{bmi}</b>, which means you are classified as{" "}
-        <b>{bmiClassified}</b>
-      </p>
+        <p className={styles.classification}>
+          Your <b>BMI</b> score is <b>{bmi}</b>, which means you are classified
+          as <b>{bmiClassified}</b>
+        </p>
 
-      <div className={styles.bmiRanges}>
-        <div> 18.5 or less</div>
-        <div> UnderWeight</div>
+        <div className={styles.bmiRanges}>
+          <div> 18.5 or less</div>
+          <div> UnderWeight</div>
+        </div>
+        <div className={styles.bmiRanges}>
+          <div> 18.5 - 24.99</div>
+          <div> Normal Weight</div>
+        </div>
+        <div className={styles.bmiRanges}>
+          <div> 25-29.99</div>
+          <div> Overweight</div>
+        </div>
+        <div className={styles.bmiRanges}>
+          <div> 30+</div>
+          <div> Obese</div>
+        </div>
       </div>
-      <div className={styles.bmiRanges}>
-        <div> 18.5 - 24.99</div>
-        <div> Normal Weight</div>
-      </div>
-      <div className={styles.bmiRanges}>
-        <div> 25-29.99</div>
-        <div> Overweight</div>
-      </div>
-      <div className={styles.bmiRanges}>
-        <div> 30+</div>
-        <div> Obese</div>
-      </div>
-    </div>
+    </>
   );
 }

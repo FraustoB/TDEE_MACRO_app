@@ -17,6 +17,13 @@ export default function BodyMetrics({
     return maintenanceCal;
   }
 
+  //Passes the current calories per day amount back to main [data] page
+  // to be passed down as a prop to the macroCalc component
+  useEffect(() => {
+    setCalories(calPerDay);
+    console.log("calories set [message sent form calperday]");
+  }, [calPerDay]);
+
   const activityCalories = activityLvls.map((cur) => (
     //need to use React.Fragments in order to avoid errors in react but also not introduce
     //new elements to the dom
