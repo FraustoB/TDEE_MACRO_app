@@ -1,0 +1,46 @@
+$background-color: #f8c996;
+.macros {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.macroGrid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 10rem 10rem 10rem;
+  grid-gap: 1rem;
+}
+
+.macroCalories {
+  border-bottom: black 1px solid;
+}
+.macroTitle {
+  font-weight: 150;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.modCarbs,
+.lowCarbs,
+.highCarbs {
+  border-radius: 0.5em;
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+
+  h2 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    border-bottom: 1px dotted black;
+  }
+  p {
+    margin-top: 0px;
+    font-size: 0.85em;
+    margin-bottom: 0px;
+  }
+}
+
+.dailyCal {
+  font-weight: 900;
+}
