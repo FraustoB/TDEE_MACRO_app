@@ -1,9 +1,22 @@
 .form {
-  background: lightcoral;
+  background: #f3f6f4;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 35rem;
+  @media all and (max-width: 400px) {
+    width: 100vw;
+  }
+  height: 35rem;
+
+  .sexInput {
+    margin-bottom: 1rem;
+  }
+  .sexInputFemale {
+    margin-left: 1rem;
+  }
 
   .label {
     margin-right: 1em;

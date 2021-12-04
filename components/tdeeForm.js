@@ -49,7 +49,7 @@ export default function TdeeForm() {
     <>
       <div className={styles.form}>
         <form onSubmit={handleSubmit}>
-          <section>
+          <section className={styles.sexInput}>
             <input
               type="radio"
               checked={sex === "male"}
@@ -57,6 +57,7 @@ export default function TdeeForm() {
               value="male"
               name="sex"
               onChange={handleChange}
+              className={styles.sexInputMale}
             />
             <label htmlFor="sexMale">Male</label>
 
@@ -67,9 +68,11 @@ export default function TdeeForm() {
               value="female"
               name="sex"
               onChange={handleChange}
+              className={styles.sexInputFemale}
             />
             <label htmlFor="sexFemale">Female</label>
           </section>
+
           <section>
             <label className={styles.label}>Age</label>
             <input

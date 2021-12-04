@@ -49,17 +49,6 @@ export default function Data({ initData }) {
 
       <BmiCalc userInfo={initData} />
       <MacroCalc caloriesToCalc={calories} />
-
-      <br />
-      {height}
-      <br />
-      {age}
-      <br />
-      {weight}
-      <br />
-      {activityLvl}
-      <br />
-      {sex}
     </div>
   );
 }

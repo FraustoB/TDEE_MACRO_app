@@ -1,23 +1,44 @@
 .calorieSection {
   display: grid;
   grid-template-columns: 1fr 2fr;
+
+  @media all and (max-width: 390px) {
+    column-gap: 0em;
+  }
 }
 
 .mntncCal {
   display: grid;
-
   border-radius: 5px;
+  background-color: lightblue;
+  @media all and (max-width: 390px) {
+    width: 8em;
+  }
+
+  .mntncCalTitle {
+    @media all and (max-width: 390px) {
+      font-size: 0.75em;
+    }
+  }
+
   .calPerDay {
     border: solid 1px black;
     background-color: #f8c996;
+    @media all and (max-width: 390px) {
+      width: 8em;
+    }
   }
   margin-right: 10px;
-  width: 200px;
+  width: 10em;
 }
 
 .actvForm {
   display: grid;
-  grid-template-columns: 200px 200px;
+  @media all and (max-width: 570px) {
+    grid-template-columns: 10em 10em;
+    font-size: 0.75em;
+  }
+  grid-template-columns: 12em 12em;
 }
 
 .bottom {

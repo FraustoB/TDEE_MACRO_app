@@ -40,7 +40,7 @@ export default function BodyMetrics({
   return (
     <div className={styles.calorieSection}>
       <div className={styles.mntncCal}>
-        <div>YOUR MAINTENANCE CALORIES</div>
+        <div className={styles.mntncCalTitle}>YOUR MAINTENANCE CALORIES</div>
         <div className={styles.calPerDay}>
           <div>{calPerDay.toLocaleString()}</div>
           <div>Calories Per Day</div>
