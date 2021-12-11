@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TDEE-Form</title>
+        <title>TDEE | CALC YOUR MACROS </title>
       </Head>
 
       <div className={styles.main}>

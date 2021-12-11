@@ -4,6 +4,7 @@ import {
   calculateLowCarbMacros,
   calculateHighCarbMacros,
 } from "../functions/calculateMacros";
+import Head from "next/head";
 
 import { useState, useEffect } from "react";
 
@@ -63,60 +64,66 @@ export default function MacroEditor({ caloriesToCalc }) {
   }
 
   return (
-    <div className={styles.macros}>
-      <span className={styles.macroCalories}>
-        <div className={styles.macroButtons}>
-          <button onClick={handleMntncOnClick}>maintenance</button>
-          <button onClick={handleCutOnClick}>cutting</button>
-          <button onClick={handleBulkOnClick}>bulking</button>{" "}
-        </div>
-        These Macronutrient Values reflect your {macros.calorieAmt} calories of{" "}
-        <span className={styles.dailyCal}>{macros.calorieEatAmt}</span> calories
-        per day
-      </span>
+    <>
+      <Head>
+        <title>TDEE | RESULTS</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className={styles.macros}>
+        <span className={styles.macroCalories}>
+          <div className={styles.macroButtons}>
+            <button onClick={handleMntncOnClick}>maintenance</button>
+            <button onClick={handleCutOnClick}>cutting</button>
+            <button onClick={handleBulkOnClick}>bulking</button>{" "}
+          </div>
+          These Macronutrient Values reflect your {macros.calorieAmt} calories
+          of <span className={styles.dailyCal}>{macros.calorieEatAmt}</span>{" "}
+          calories per day
+        </span>
 
-      <div className={styles.macroGrid}>
-        <div className={styles.modCarbs}>
-          <span className={styles.macroTitle}>Moderate Carbs</span>
-          <br />
-          <h2> {modCarbMacros.protein}g</h2>
-          <p>protein</p>
-          <br />
-          <h2> {modCarbMacros.carbs}g</h2>
-          <p>carbohydrates</p>
-          <br />
-          <h2> {modCarbMacros.fats}g</h2>
-          <p>fats</p>
-          <br />
-        </div>
+        <div className={styles.macroGrid}>
+          <div className={styles.modCarbs}>
+            <span className={styles.macroTitle}>Moderate Carbs</span>
+            <br />
+            <h2> {modCarbMacros.protein}g</h2>
+            <p>protein</p>
+            <br />
+            <h2> {modCarbMacros.carbs}g</h2>
+            <p>carbohydrates</p>
+            <br />
+            <h2> {modCarbMacros.fats}g</h2>
+            <p>fats</p>
+            <br />
+          </div>
 
-        <div className={styles.lowCarbs}>
-          <span className={styles.macroTitle}>low Carbs</span>
-          <br />
-          <h2> {lowCarbMacros.protein}g</h2>
-          <p>protein</p>
-          <br />
-          <h2> {lowCarbMacros.carbs}g</h2>
-          <p>carbohydrates</p>
-          <br />
-          <h2> {lowCarbMacros.fats}g</h2>
-          <p>fats</p>
-          <br />
-        </div>
-        <div className={styles.highCarbs}>
-          <span className={styles.macroTitle}>High Carbs</span>
-          <br />
-          <h2> {highCarbMacros.protein}g</h2>
-          <p>protein</p>
-          <br />
-          <h2> {highCarbMacros.carbs}g</h2>
-          <p>carbohydrates</p>
-          <br />
-          <h2> {highCarbMacros.fats}g</h2>
-          <p>fats</p>
-          <br />
+          <div className={styles.lowCarbs}>
+            <span className={styles.macroTitle}>low Carbs</span>
+            <br />
+            <h2> {lowCarbMacros.protein}g</h2>
+            <p>protein</p>
+            <br />
+            <h2> {lowCarbMacros.carbs}g</h2>
+            <p>carbohydrates</p>
+            <br />
+            <h2> {lowCarbMacros.fats}g</h2>
+            <p>fats</p>
+            <br />
+          </div>
+          <div className={styles.highCarbs}>
+            <span className={styles.macroTitle}>High Carbs</span>
+            <br />
+            <h2> {highCarbMacros.protein}g</h2>
+            <p>protein</p>
+            <br />
+            <h2> {highCarbMacros.carbs}g</h2>
+            <p>carbohydrates</p>
+            <br />
+            <h2> {highCarbMacros.fats}g</h2>
+            <p>fats</p>
+            <br />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
