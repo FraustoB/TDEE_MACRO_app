@@ -11,7 +11,7 @@ export default function Home() {
 
       <div className={styles.main}>
         <div className={styles.Title}>TDEE CALCULATOR</div>
-        <p>
+        <p className={styles.information}>
           {" "}
           Calculate your approximate Total Daily Energy Expenditure (tdee) using
           the calculator below{" "}

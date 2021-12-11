@@ -42,7 +42,6 @@ export default function TdeeTopForm(data) {
 
   return (
     <>
-      <div>This is the top form</div>
       <form onSubmit={handleSubmit} className={styles.form}>
         You are a
         <input

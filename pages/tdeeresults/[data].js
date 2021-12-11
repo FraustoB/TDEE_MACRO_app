@@ -34,7 +34,7 @@ export default function Data({ initData }) {
 
   return (
     <div className={styles.body}>
-      <h1>STATS</h1>
+      <h1>YOUR STATS</h1>
 
       <TdeeTopForm props={initData} />
       <BodyMetrics

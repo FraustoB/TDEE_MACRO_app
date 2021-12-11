@@ -43,11 +43,11 @@ export default function BodyMetrics({
         <div className={styles.mntncCalTitle}>YOUR MAINTENANCE CALORIES</div>
         <div className={styles.calPerDay}>
           <div>{calPerDay.toLocaleString()}</div>
-          <div>Calories Per Day</div>
+          <div className={styles.mntncCalTitle}>Calories Per Day</div>
         </div>
         <div className={styles.calPerDay}>
           <div>{(calPerDay * 7).toLocaleString()}</div>
-          <div>Calories Per Week</div>
+          <div className={styles.mntncCalTitle}>Calories Per Week</div>
         </div>
       </div>
 

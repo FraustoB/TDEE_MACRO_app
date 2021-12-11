@@ -7,30 +7,92 @@ import {
 
 import { useState } from "react";
 export default function MacroEditor({ caloriesToCalc }) {
-  const [clicked, setClicked] = useState({
+  const [macros, setMacros] = useState({
     isMntncClicked: true,
-    isCuttingclicked: false,
+    isCuttingClicked: false,
     isBulkingClicked: false,
+    calorieAmt: "maintenence",
+    calorieDefecit: 0,
   });
 
-  const cuttingCalories = caloriesToCalc - 500;
-  const bulkingCalories = caloriesToCalc + 500;
-  const maintenanceCalories = caloriesToCalc;
-  const modCarbMacros = calculateModCarbMacros(maintenanceCalories);
-  const lowCarbMacros = calculateLowCarbMacros(maintenanceCalories);
-  const highCarbMacros = calculateHighCarbMacros(maintenanceCalories);
-
-  console.log(
-    modCarbMacros,
-    lowCarbMacros,
-    highCarbMacros,
-    "from macroCalc.js"
+  const modCarbMacros = calculateModCarbMacros(
+    caloriesToCalc - macros.calorieDefecit
   );
+  const lowCarbMacros = calculateLowCarbMacros(
+    caloriesToCalc - macros.calorieDefecit
+  );
+  const highCarbMacros = calculateHighCarbMacros(
+    caloriesToCalc - macros.calorieDefecit
+  );
+
+  console.log(macros);
+
+  function handleMntncOnClick() {
+    if (macros.isMntncClicked === false) {
+      setMacros({
+        ...macros,
+        calorieDefecit: 0,
+        isMntncClicked: true,
+        calorieAmt: "maintenence",
+      });
+    }
+
+    if (macros.isBulkingClicked == true) {
+      setMacros({ ...macros, isBulkingClicked: false });
+    }
+
+    if (macros.isCuttingclicked == true) {
+      setMacros({ ...macros, isCuttingClicked: false });
+    }
+  }
+
+  function handleCutOnClick() {
+    if (macros.isCuttingClicked === false) {
+      setMacros({
+        ...macros,
+        calorieDefecit: 500,
+        isCuttingClicked: true,
+        calorieAmt: "cutting",
+      });
+    }
+
+    if (macros.isBulkingClicked != false) {
+      setMacros({ ...macros, isBulkingClicked: false });
+    }
+
+    if (macros.isMntncClicked != false) {
+      setMacros({ ...macros, isMntncClicked: false });
+    }
+  }
+
+  function handleBulkOnClick() {
+    if (macros.isBulkingClicked === false) {
+      setMacros({
+        ...macros,
+        calorieDefecit: -500,
+        isBulkingClicked: true,
+        calorieAmt: "bulking",
+      });
+    }
+
+    if (macros.isMntncClicked != false) {
+      setMacros({ ...macros, isMntncClicked: false });
+    }
+
+    if (macros.isCuttingClicked != false) {
+      setMacros({ ...macros, isCuttingClicked: false });
+    }
+  }
 
   return (
     <div className={styles.macros}>
       <span className={styles.macroCalories}>
-        These Macronutrient Values reflect your maintenance calories of{" "}
+        <div className={styles.macroButtons}>
+          <button onClick={handleMntncOnClick}>maintenance</button>
+          <button onClick={handleCutOnClick}>cutting</button>
+          <button onClick={handleBulkOnClick}>bulking</button>{" "}
+        </div>
+        These Macronutrient Values reflect your {macros.calorieAmt} calories of{" "}
         <span className={styles.dailyCal}>{caloriesToCalc}</span> calories per
         day
       </span>

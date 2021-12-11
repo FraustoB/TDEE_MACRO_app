@@ -1,16 +1,18 @@
 .calorieSection {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  background-color: #f8c996;
 
   @media all and (max-width: 390px) {
     column-gap: 0em;
   }
+  border-radius: 5px;
 }
 
 .mntncCal {
   display: grid;
   border-radius: 5px;
-  background-color: lightblue;
+
   @media all and (max-width: 390px) {
     width: 8em;
   }
@@ -19,11 +21,12 @@
     @media all and (max-width: 390px) {
       font-size: 0.75em;
     }
+    font-weight: 500;
   }
 
   .calPerDay {
     border: solid 1px black;
-    background-color: #f8c996;
+    background-color: #ffd7ba;
     @media all and (max-width: 390px) {
       width: 8em;
     }
@@ -43,6 +46,7 @@
 
 .bottom {
   border-bottom: solid 1px black;
+  font-size: 1em;
 }
 
 .caloriesBottom {

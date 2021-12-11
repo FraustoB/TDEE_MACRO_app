@@ -13,7 +13,9 @@ export default function TdeeForm() {
     weight: "",
     activityLvl: "",
     sex: "",
+    errorMessage: "",
   });
+
   // Destructer state to allow cleaner data
   const { age, height, weight, activityLvl, sex } = params;
 
@@ -24,10 +26,17 @@ export default function TdeeForm() {
   //Pushes Data inputted by user to the page that will calculate TDEE
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit", params);
-    router.push(
-      `/tdeeresults/data?sex=${sex}&age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`
-    );
+    if (!age || !height || !activityLvl || !sex) {
+      setParams({
+        ...params,
+        errorMessage:
+          "One or more values are missing, please ensure all values have been inputted",
+      });
+    } else {
+      router.push(
+        `/tdeeresults/data?sex=${sex}&age=${age}&height=${height}&weight=${weight}&activityLvl=${activityLvl}`
+      );
+    }
   };
 
   // List of heights in inches and centimeters used by the dropdown menu
@@ -99,7 +108,15 @@ export default function TdeeForm() {
 
           <div>
             <label className={styles.label}>Height</label>
-            <select name="height" value={height} onChange={handleChange}>
+            <select
+              className={styles.input}
+              name="height"
+              onChange={handleChange}
+              defaultValue="default"
+            >
+              <option value="default" disabled hidden>
+                Select your height
+              </option>
               {optionItems}
             </select>
           </div>
@@ -112,7 +129,12 @@ export default function TdeeForm() {
               onChange={handleChange}
               name="activityLvl"
               className={styles.input}
+              defaultValue="default"
             >
+              <option value="default" disabled hidden>
+                {" "}
+                Select Activity Level{" "}
+              </option>
               {optionActivity}
             </select>
           </div>
@@ -120,6 +142,8 @@ export default function TdeeForm() {
           <br />
           <button>Calculate</button>
         </form>
+
+        <div className={styles.errorMessage}>{params.errorMessage}</div>
       </div>
     </>
   );

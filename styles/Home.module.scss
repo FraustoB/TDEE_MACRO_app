@@ -1,12 +1,12 @@
 .main {
-  background-color: #f8c996;
+  background: #f3f6f4;
   margin: auto;
   padding: auto;
   height: 50rem;
   border: 1px solid black;
   width: 40rem;
 
-  @media all and (max-width: 400px) {
+  @media all and (max-width: 450px) {
     width: 100vw;
   }
   display: flex;
@@ -14,12 +14,20 @@
   align-items: center;
 }
 
+.information {
+  font-weight: 900;
+  font-size: 4rem;
+}
+
 .Title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: tahoma;
+  font-weight: 600;
   font-size: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .main {
